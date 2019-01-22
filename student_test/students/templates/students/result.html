@@ -1,0 +1,9 @@
+{% extends 'students/base.html' %}
+{% block content %}
+
+{% if not attempt.is_active %}
+<p>you have completed the test and the marks :{{marks}}</p>
+{% endif %}
+<p><a type="button" class="btn btn-secondary" href="{% url 'students:test_list' %}">Exit</a></p>
+
+{% endblock content %}

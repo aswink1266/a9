@@ -1,0 +1,47 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+	<h1>Tests</h1>
+	<hr />
+	<p>
+		{% if user.is_staff %}<a class="btn btn-danger" href="{% url 'students:create_test' %}">New Test</a>{% endif %}
+	</p>
+
+<table class="table table-bordered">
+	<thead>
+	<tr>
+		<th>Test published on:</th>
+		<th>Test name:</th>
+		{% if user.is_active%}
+		<th>Action</th>
+		{% endif %}
+	</tr>
+	</thead>
+	<tbody>
+		{% for test in tests %}
+	<tr>
+		<td>{{ test.published_on }}</td>
+		<td>{{ test.test_name }}</td>
+		{% if user.is_active%}
+		<td>
+			{% if user.is_staff %}
+			<p>
+				<a class="btn btn-success" href="{% url 'students:update_test' pk=test.id %}">View/Add Question</a>
+				{% if user.username == test.user.username or user.is_superuser %}
+				<a class="btn btn-danger" href="{% url 'students:delete_test' pk=test.id %}">Delete</a>
+				{% endif %}
+				{% else %}
+				<a class="btn btn-success" href="{% url 'students:exam_test' test.id %}">Attempt Test</a>
+				{% endif %}
+			</p>
+		</td>
+		{% endif %}
+		{% empty %}
+		<td colspan="2">No tests</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+{% endblock content %}

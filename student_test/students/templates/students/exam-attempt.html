@@ -1,0 +1,16 @@
+{% extends 'students/base.html' %}
+{% block content %}
+
+<p>{{ question.question }}</p>
+<form method="post">
+  {% csrf_token %}
+  <input name="answer" value="{{ question.choice_1 }}" type="radio">{{ question.choice_1 }}
+  <br />
+  <input name="answer" value="{{ question.choice_2 }}" type="radio">{{ question.choice_2 }}
+  <br />
+  <input name="answer" value="{{ question.choice_3 }}" type="radio">{{ question.choice_3 }}
+  <br />
+  <button type="submit">Submit</button>
+</form>
+
+{% endblock content %}

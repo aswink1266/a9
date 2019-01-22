@@ -1,0 +1,35 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<h1>{{ user_profile.get_full_name }}</h1>
+<hr />
+<table class="table table-bordered">
+	<tr>
+		<td>Name</td>
+		<td>{{ user_profile.get_full_name}}</td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td>{{ user_profile.email }}</td>
+	</tr>
+	<tr>
+		<td>Username</td>
+		<td>{{ user_profile.username }}</td>
+	</tr>
+	<tr>
+		<td>Status</td>
+		{% if user_profile.is_superuser %}
+		<td>Admin</td>
+		{% elif user_profile.is_staff %}
+		<td>Staff</td>
+		{% else %}<td>Student</td>
+		{% endif %}
+	</tr>
+</table>
+<hr/>
+{%if user.is_superuser %}
+<p><a type="button" class="btn btn-primary" href="{% url 'accounts:user_update' pk=user_profile.id %}">Updateuser</a></p>
+{% endif %}
+
+{% endblock content %}

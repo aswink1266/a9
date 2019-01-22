@@ -1,0 +1,44 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<h1>Test: {{test.test_name}}</h1>
+<hr/>
+{% if user.username == test.user.username or user.is_superuser %}
+<a class="btn btn-success" href="{% url 'students:create_question' pk=test.id %}"><span class="glyphicon glyphicon-plus"></span>Add Question</a>
+{% endif %}
+<hr/>
+<h3>Test Details</h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Student name</th>
+        <th>marks</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for attempt in test.testattempt_set.all %}
+    <tr>
+        <td>{{ attempt.user.get_full_name }}</td>
+        <td>{{ attempt.marks }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<hr/>
+<h3>Questions Available</h3>
+<hr/>
+{% for question in test.question_set.all %}
+<p>Question : {{question.question}}</p>
+<p>Choice1 : {{question.choice_1}}</p>
+<p>Choice2 : {{question.choice_2}}</p>
+<p>Choice3 : {{question.choice_3}}</p>
+{% if user.username == test.user.username or user.is_superuser %}
+<a class="btn btn-danger" href="{% url 'students:delete_question' pk=question.id %}">Delete</a>
+{% endif %}
+<hr/>
+{% empty %}
+<p>No questions</p>
+{% endfor%}
+
+{% endblock content%}

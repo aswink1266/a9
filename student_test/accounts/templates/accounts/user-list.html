@@ -1,0 +1,46 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<h1 class="text-center">Users</h1>
+<hr />
+<form>
+	<input type="search" name="term" />
+	<button type="submit">Search</button>
+</form>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>status</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for u in users %}
+		<tr>
+			<td>{{ u.id }}</td>
+			<td>
+				<a href="{% url 'accounts:user_detail' pk=u.id %}">{{ u.get_full_name }}</a>
+			</td>
+			<td>{{ u.email }}</td>
+			{% if u.is_superuser %}
+			<td>Admin</td>
+			{% elif u.is_staff %}
+			<td>Staff</td>
+			{% else %}
+			<td>Student</td>
+			{% endif %}
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+<script>
+function status(){
+var x =document.getElementById("status").text
+if u.is_superuser
+	document.getElementById("status").text=
+</script>
+
+{% endblock content %}

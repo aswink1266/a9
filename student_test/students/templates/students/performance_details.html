@@ -1,0 +1,25 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+    <thead>
+   <tr>
+       <th>Test</th>
+       <th>Score</th>
+   </tr>
+   </thead>
+    <tbody>
+    {% for attempt in test_attempt %}
+    <tr>
+       <td>{{attempt.test.test_name }}</td>
+       <td>{{ attempt.marks }}</td>
+       {% empty %}
+    <tr>
+    <td colspan="2">no test attempt</td>
+</tr>
+     {% endfor %}
+    </tbody>
+ </table>
+
+{% endblock content %}

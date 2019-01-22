@@ -1,0 +1,33 @@
+{% extends "accounts/base.html"%}
+{% block content %}
+
+<h1>
+    {{ user.username }}</h1>
+<hr />
+<table class="table table-bordered">
+	<tr>
+		<td>Name</td>
+		<td>{{ user.get_full_name}}</td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td>{{ user.email }}</td>
+	</tr>
+	<tr>
+		<td>Username</td>
+		<td>{{ user.username }}</td>
+	</tr>
+	<tr>
+		<td>Status</td>
+		{% if user.is_superuser %}
+		<td>
+			Admin
+		</td>
+		{% elif user.is_staff %}
+		<td>Staff</td>
+		{% else %}
+		<td>Student</td>{% endif %}
+	</tr>
+</table>
+
+{% endblock content %}
